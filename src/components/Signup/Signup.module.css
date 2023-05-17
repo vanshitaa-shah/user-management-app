@@ -38,6 +38,14 @@
   width: 100%;
 }
 
+#preview {
+  position: absolute;
+  top: -85%;
+  left: 15%;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
 input {
   padding: 0.5rem;
   border: 1px solid rgb(219, 219, 219);
