@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(231, 183, 250);
+  padding: 10px;
+  color: #004886;
+}
+
+#logoutBtn {
+  background-color: #1389f0;
+  padding: 0.7rem;
+  border-radius: 5px;
+  color: white;
+  margin-right: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+#logoutBtn:hover {
+  background-color: #047cdf;
+}
