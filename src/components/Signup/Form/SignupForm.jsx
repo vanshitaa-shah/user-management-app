@@ -2,25 +2,30 @@ import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import previewImg from "../../../assets/preview.png";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import {
-  initialValues,
-  onSubmit,
-  validate,
-  validateSchema,
-} from "../FormUtils/FormValidations";
+import { initialValues, validateSchema } from "../FormUtils/FormValidations";
 import InputField from "../InputField/InputField";
 import Styles from "../Signup.module.css";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [preview, setPreview] = useState(previewImg);
 
   const handleProfilePreview = (e) => {
     const file = e.target.files[0];
+    console.log(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setPreview(reader.result);
     };
+  };
+
+  const onSubmit = (values, onSubmitprops) => {
+    console.log("submitted");
+    console.log("Form Data", values);
+    onSubmitprops.resetForm();
+    navigate("/home");
   };
   return (
     <Formik
