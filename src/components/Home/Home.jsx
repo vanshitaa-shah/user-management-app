@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Styles from "./Home.module.css";
+import Img from "../../assets/img.jpg";
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
       <div className={Styles.homeContainer}>
         <div className={Styles.container}>
           <div className={Styles.imgContainer}>
-            <img src="https://reqres.in/img/faces/9-image.jpg" alt="" />
+            <img src={Img} alt="" />
           </div>
           <h1 className={Styles.greeting}>Hello Vanshita!</h1>
           <p>
