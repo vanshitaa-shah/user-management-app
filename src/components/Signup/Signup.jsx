@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img from "../../assets/signup.png";
 import Styles from "./Signup.module.css";
 
@@ -44,13 +45,15 @@ const Signup = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                className={Styles.btn}
-                id={Styles.submitBtn}
-              >
-                Signup
-              </button>
+              <Link to="/home">
+                <button
+                  type="submit"
+                  className={Styles.btn}
+                  id={Styles.submitBtn}
+                >
+                  Signup
+                </button>
+              </Link>
 
               <button type="reset" className={Styles.btn} id={Styles.resetBtn}>
                 Reset
