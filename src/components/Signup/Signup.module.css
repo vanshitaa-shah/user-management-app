@@ -1,0 +1,102 @@
+.mainContainer {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupContainer {
+  justify-content: space-between;
+  display: flex;
+  width: 60%;
+}
+
+#heading {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.formContainer {
+  width: 40%;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.imageContainer img {
+  width: 100%;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid rgb(219, 219, 219);
+  outline: none;
+  background-color: rgb(255, 233, 205);
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  padding: 0.7rem;
+  border-radius: 5px;
+  color: white;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+#submitBtn {
+  background-color: #1389f0;
+}
+#submitBtn:hover {
+  background-color: #047cdf;
+}
+#resetBtn {
+  background-color: #dc3545;
+}
+#resetBtn:hover {
+  background-color: #ce081c;
+}
+
+.profile label {
+  text-align: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+  .imageContainer {
+    display: none;
+  }
+  .formContainer {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .imageContainer {
+    display: none;
+  }
+  .formContainer {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .signupContainer {
+    width: 85%;
+  }
+}
