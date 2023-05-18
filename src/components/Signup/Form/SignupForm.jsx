@@ -6,10 +6,13 @@ import { initialValues, validateSchema } from "../FormUtils/FormValidations";
 import InputField from "../InputField/InputField";
 import Styles from "../Signup.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../store/authSlice";
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const [preview, setPreview] = useState(previewImg);
+  const dispatch = useDispatch();
 
   const handleProfilePreview = (e) => {
     const file = e.target.files[0];
@@ -22,9 +25,18 @@ const SignupForm = () => {
   };
 
   const onSubmit = (values, onSubmitprops) => {
-    console.log("submitted");
-    console.log("Form Data", values);
+    const { name, email, phone } = values;
+    console.log(profile);
+    dispatch(
+      authActions.register({
+        name: name,
+        email: email,
+        phone: phone,
+        profile: preview,
+      })
+    );
     onSubmitprops.resetForm();
+    setPreview(previewImg);
     navigate("/home");
   };
   return (
