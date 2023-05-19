@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProtectedRoutes = ({ Component }) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  // const [isAuthenticated, setISAuthenticated] = useState(isLoggedIn);
+  const [isAuthenticated, setISAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,12 +15,9 @@ const ProtectedRoutes = ({ Component }) => {
     } else {
       navigate("/home");
     }
+    setISAuthenticated(true);
   }, [isLoggedIn]);
-  return (
-    <div>
-      <Component />
-    </div>
-  );
+  return isAuthenticated && <Component />;
 };
 
 export default ProtectedRoutes;

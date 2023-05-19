@@ -58,6 +58,9 @@ const authSlice = createSlice({
       localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
       localStorage.removeItem("current-user");
     },
+    clearError(state) {
+      if (state.isError) state.isError = false;
+    },
   },
 });
 export const authActions = authSlice.actions;

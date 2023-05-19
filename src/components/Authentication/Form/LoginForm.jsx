@@ -15,7 +15,6 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isError = useSelector((state) => state.auth.isError);
-  const [showError, setShowError] = useState(isError);
   const errorMessage = useSelector((state) => state.auth.errorMessage);
 
   useEffect(() => {
@@ -26,16 +25,6 @@ const LoginForm = () => {
 
   const onSubmit = (values) => {
     dispatch(authActions.login(values));
-    errorHandler();
-  };
-
-  const errorHandler = () => {
-    if (isError) {
-      setShowError(true);
-      setTimeout(() => {
-        setShowError(false);
-      }, 1500);
-    }
   };
 
   return (
@@ -50,12 +39,7 @@ const LoginForm = () => {
 
           <InputField name="password" value="Password" type="password" />
 
-          <button
-            type="submit"
-            className={Styles.btn}
-            id={Styles.submitBtn}
-            onClick={errorHandler}
-          >
+          <button type="submit" className={Styles.btn} id={Styles.submitBtn}>
             Login
           </button>
 
@@ -64,7 +48,7 @@ const LoginForm = () => {
           </button>
         </Form>
       </Formik>
-      <FormErrors errorMessage={errorMessage} showError={showError} />
+      {isError && <FormErrors errorMessage={errorMessage} />}
     </>
   );
 };

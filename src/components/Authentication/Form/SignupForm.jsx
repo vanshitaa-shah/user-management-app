@@ -17,8 +17,6 @@ import FormErrors from "../FormUtils/FormErrors";
 const SignupForm = () => {
   const navigate = useNavigate();
   const [preview, setPreview] = useState(previewImg);
-  const [showError, setShowError] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const isError = useSelector((state) => state.auth.isError);
@@ -26,10 +24,10 @@ const SignupForm = () => {
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/home");
-    } else if (!isError && isRegistered) {
-      navigate("/login");
+    } else {
+      navigate("/signup");
     }
-  }, [isLoggedIn, isRegistered, isError]);
+  }, [isLoggedIn]);
 
   const handleProfilePreview = (e) => {
     const file = e.target.files[0];
@@ -38,15 +36,6 @@ const SignupForm = () => {
     reader.onload = () => {
       setPreview(reader.result);
     };
-  };
-
-  const errorHandler = () => {
-    if (isError) {
-      setShowError(true);
-      setTimeout(() => {
-        setShowError(false);
-      }, 1500);
-    }
   };
 
   const onSubmit = (values) => {
@@ -61,7 +50,6 @@ const SignupForm = () => {
       })
     );
     setIsRegistered(true);
-    errorHandler();
   };
   return (
     <>
@@ -122,7 +110,7 @@ const SignupForm = () => {
           </Form>
         )}
       </Formik>
-      <FormErrors errorMessage={errorMessage} showError={showError} />
+      {isError && <FormErrors errorMessage={errorMessage} />}
     </>
   );
 };
