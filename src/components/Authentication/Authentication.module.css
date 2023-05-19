@@ -5,9 +5,11 @@
   align-items: center;
 }
 
-.signupContainer {
-  justify-content: space-between;
+.container {
   display: flex;
+  padding: 20px;
+  border: 1px solid #fff4ff;
+  box-shadow: 0px 1px 6px 0 rgb(0 0 0 / 30%);
   width: 60%;
 }
 
@@ -35,7 +37,8 @@
 }
 
 .imageContainer img {
-  width: 100%;
+  width: 80%;
+  margin-left: 20%;
 }
 
 #preview {
@@ -86,16 +89,19 @@ label {
   cursor: pointer;
 }
 
-@media screen and (max-width: 425px) {
-  .imageContainer {
-    display: none;
-  }
-  .formContainer {
-    flex: 1;
-  }
+.bottomSection {
+  margin-top: 2rem;
+}
+.bottomSection a {
+  margin-left: 5px;
+  text-decoration: none;
 }
 
-@media screen and (max-width: 600px) {
+.bottomSection a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
   .imageContainer {
     display: none;
   }
@@ -105,7 +111,7 @@ label {
 }
 
 @media screen and (max-width: 1024px) {
-  .signupContainer {
+  .container {
     width: 85%;
   }
 }

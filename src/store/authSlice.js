@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user-info")) || {},
+  currentUser: JSON.parse(localStorage.getItem("current-user")) || {},
   isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
+  isError: false,
+  errorMessage: "",
 };
 
 const authSlice = createSlice({
@@ -10,16 +12,51 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     register(state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      localStorage.setItem("user-info", JSON.stringify(state.user));
-      localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const existingUser = users.filter(
+        (user) => user.email === action.payload.email
+      )[0];
+      if (!existingUser) {
+        state.isError = false;
+        localStorage.setItem(
+          "users",
+          JSON.stringify([...users, action.payload])
+        );
+        state.isLoggedIn = true;
+        localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
+        state.currentUser = action.payload;
+        localStorage.setItem("current-user", JSON.stringify(action.payload));
+      } else {
+        state.isError = true;
+        state.errorMessage = "User already exists,login instead!";
+      }
+    },
+    login(state, action) {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const userInfo = users.filter(
+        (user) => user.email === action.payload.email
+      )[0];
+      if (userInfo) {
+        if (userInfo.password === action.payload.password) {
+          state.currentUser = userInfo;
+          state.isError = false;
+          state.isLoggedIn = true;
+          localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
+          localStorage.setItem("current-user", JSON.stringify(userInfo));
+        } else {
+          state.isError = true;
+          state.errorMessage = "Invalid password!";
+        }
+      } else {
+        state.isError = true;
+        state.errorMessage = "User does not exist!";
+      }
     },
     logout(state) {
-      state.user = {};
+      state.currentUser = {};
       state.isLoggedIn = false;
       localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
-      localStorage.removeItem("user-info");
+      localStorage.removeItem("current-user");
     },
   },
 });

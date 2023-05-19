@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className={Styles.header}>
       <h1>Home Page</h1>
-      <Link to="/signup" onClick={logoutHandler}>
+      <Link to="/login" onClick={logoutHandler}>
         <button id={Styles.logoutBtn}>Logout</button>
       </Link>
     </div>

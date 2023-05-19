@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrorMessage, Field } from "formik";
 import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import Styles from "../Signup.module.css";
+import Styles from "../Authentication.module.css";
 
 const InputField = ({ name, type, value }) => {
   return (

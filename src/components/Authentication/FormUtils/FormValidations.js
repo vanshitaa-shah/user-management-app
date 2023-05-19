@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-export const initialValues = {
+export const signupValues = {
   name: "",
   email: "",
   profile: "",
@@ -7,8 +7,12 @@ export const initialValues = {
   password: "",
   confirmPassword: "",
 };
+export const loginValues = {
+  email: "",
+  password: "",
+};
 
-export const validateSchema = Yup.object({
+export const signupValidateSchema = Yup.object({
   name: Yup.string()
     .min(15, "Name should contain atleat 15 characters!")
     .required("Name Required!"),
@@ -45,4 +49,14 @@ export const validateSchema = Yup.object({
       return supportedTypes.includes(value.type);
     })
     .required("Profile photo Required!"),
+});
+
+export const loginValidateSchema = Yup.object({
+  email: Yup.string()
+    .required("Email Required!")
+    .matches(
+      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+      "Invaild Email Format!"
+    ),
+  password: Yup.string().required("Password Required!"),
 });
