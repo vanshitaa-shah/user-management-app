@@ -1,67 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "auth",
+  storage: storage,
+};
 
 const initialState = {
-  currentUser: JSON.parse(localStorage.getItem("current-user")) || {},
-  isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
-  isError: false,
-  errorMessage: "",
+  users: [],
+  currentUser: null,
+  isLoggedIn: false,
+  error: null,
 };
 
 const authSlice = createSlice({
-  name: "user",
+  name: "auth",
   initialState,
   reducers: {
     register(state, action) {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const existingUser = users.filter(
+      const existingUser = state.users.find(
         (user) => user.email === action.payload.email
-      )[0];
-      if (!existingUser) {
-        state.isError = false;
-        localStorage.setItem(
-          "users",
-          JSON.stringify([...users, action.payload])
-        );
-        state.isLoggedIn = true;
-        localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
-        state.currentUser = action.payload;
-        localStorage.setItem("current-user", JSON.stringify(action.payload));
-      } else {
-        state.isError = true;
-        state.errorMessage = "User already exists,login instead!";
+      );
+
+      if (existingUser) {
+        state.error = "User already exists,Login instead!";
+        return;
       }
+
+      const newUser = action.payload;
+      state.currentUser = action.payload;
+      state.isLoggedIn = true;
+      state.error = null;
+      state.users.push(newUser);
     },
+
     login(state, action) {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const userInfo = users.filter(
-        (user) => user.email === action.payload.email
-      )[0];
-      if (userInfo) {
-        if (userInfo.password === action.payload.password) {
-          state.currentUser = userInfo;
-          state.isError = false;
+      const { email, password } = action.payload;
+      const user = state.users.find((user) => user.email === email);
+
+      if (user) {
+        if (user.password === password) {
+          state.currentUser = user;
           state.isLoggedIn = true;
-          localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
-          localStorage.setItem("current-user", JSON.stringify(userInfo));
+          state.error = null;
         } else {
-          state.isError = true;
-          state.errorMessage = "Invalid password!";
+          state.error = "Invalid Password!";
         }
       } else {
-        state.isError = true;
-        state.errorMessage = "User does not exist!";
+        state.error = "User does not exist!";
       }
     },
     logout(state) {
-      state.currentUser = {};
+      state.currentUser = null;
       state.isLoggedIn = false;
-      localStorage.setItem("isLoggedIn", JSON.stringify(state.isLoggedIn));
-      localStorage.removeItem("current-user");
+      state.error = null;
     },
     clearError(state) {
-      if (state.isError) state.isError = false;
+      state.error = null;
     },
   },
 });
+
+const persistedAuthReducer = persistReducer(persistConfig, authSlice.reducer);
+
 export const authActions = authSlice.actions;
-export default authSlice.reducer;
+export default persistedAuthReducer;

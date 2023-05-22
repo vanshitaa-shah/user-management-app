@@ -10,6 +10,18 @@
   color: #004886;
 }
 
+.navlink {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #004886;
+  font-size: 1.2rem;
+}
+
+.navlink:hover {
+  text-decoration: underline;
+  color: #1065c7;
+}
+
 #logoutBtn {
   background-color: #1389f0;
   padding: 0.7rem;

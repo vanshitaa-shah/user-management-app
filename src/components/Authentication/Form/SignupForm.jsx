@@ -8,26 +8,14 @@ import {
 } from "../FormUtils/FormValidations";
 import InputField from "../InputField/InputField";
 import Styles from "../Authentication.module.css";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../store/authSlice";
-import { useEffect } from "react";
 import FormErrors from "../FormUtils/FormErrors";
 
 const SignupForm = () => {
-  const navigate = useNavigate();
   const [preview, setPreview] = useState(previewImg);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-  const isError = useSelector((state) => state.auth.isError);
-  const errorMessage = useSelector((state) => state.auth.errorMessage);
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    } else {
-      navigate("/signup");
-    }
-  }, [isLoggedIn]);
+  const errorMessage = useSelector((state) => state.auth.error);
 
   const handleProfilePreview = (e) => {
     const file = e.target.files[0];
@@ -49,7 +37,6 @@ const SignupForm = () => {
         password: password,
       })
     );
-    setIsRegistered(true);
   };
   return (
     <>
@@ -110,7 +97,7 @@ const SignupForm = () => {
           </Form>
         )}
       </Formik>
-      {isError && <FormErrors errorMessage={errorMessage} />}
+      {errorMessage && <FormErrors errorMessage={errorMessage} />}
     </>
   );
 };
