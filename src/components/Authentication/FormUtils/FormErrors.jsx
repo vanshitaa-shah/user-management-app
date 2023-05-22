@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../store/authSlice";
 import Styles from "./FormErrors.module.css";
 
+// Form-level Errors
 const FormErrors = ({ errorMessage }) => {
   const [showError, setShowError] = useState(false);
   const dispatch = useDispatch();

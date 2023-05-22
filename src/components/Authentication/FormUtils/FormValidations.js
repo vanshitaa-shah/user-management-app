@@ -1,4 +1,6 @@
 import * as Yup from "yup";
+
+// Signup Form  validation
 export const signupValues = {
   name: "",
   email: "",
@@ -6,10 +8,6 @@ export const signupValues = {
   phone: "",
   password: "",
   confirmPassword: "",
-};
-export const loginValues = {
-  email: "",
-  password: "",
 };
 
 export const signupValidateSchema = Yup.object({
@@ -23,16 +21,20 @@ export const signupValidateSchema = Yup.object({
       /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
       "Invaild Email Format!"
     ),
+
   phone: Yup.string()
     .required("Phone Number Required!")
     .matches(/^(\+91|0)?[6789]\d{9}$/, "Invalid phone number!"),
+
   password: Yup.string().required("Password Required!"),
+
   confirmPassword: Yup.string()
     .required("Required!")
     .oneOf(
       [Yup.ref("password"), null],
       "Password and Confirm password does not match!"
     ),
+
   profile: Yup.mixed()
     .test("fileSize", "Image size should be less than 2MB", (value) => {
       if (!value) {
@@ -50,6 +52,12 @@ export const signupValidateSchema = Yup.object({
     })
     .required("Profile photo Required!"),
 });
+
+// Login Form Validation
+export const loginValues = {
+  email: "",
+  password: "",
+};
 
 export const loginValidateSchema = Yup.object({
   email: Yup.string()

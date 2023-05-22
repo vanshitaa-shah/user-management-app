@@ -8,6 +8,7 @@ import Authentication from "./components/Authentication/Authentication";
 const App = () => {
   return (
     <Routes>
+      {/* For converting Default Route to /login */}
       <Route path="/" element={<Navigate to="/login" />}></Route>
       <Route path="/signup" element={<Authentication type="SignUp" />}></Route>
       <Route path="/login" element={<Authentication type="Login" />}></Route>

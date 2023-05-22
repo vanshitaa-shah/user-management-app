@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import Styles from "./Header.module.css";
 
+// Header component
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();

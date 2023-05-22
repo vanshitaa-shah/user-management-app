@@ -17,6 +17,7 @@ const SignupForm = () => {
   const dispatch = useDispatch();
   const errorMessage = useSelector((state) => state.auth.error);
 
+  // Handler for Profile picture Preview
   const handleProfilePreview = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -38,6 +39,7 @@ const SignupForm = () => {
       })
     );
   };
+
   return (
     <>
       <Formik
@@ -97,6 +99,7 @@ const SignupForm = () => {
           </Form>
         )}
       </Formik>
+
       {errorMessage && <FormErrors errorMessage={errorMessage} />}
     </>
   );

@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Styles from "./Home.module.css";
 import { useSelector } from "react-redux";
 
+// Home page
 const Home = () => {
   const userInfo = useSelector((state) => state.auth.currentUser);
 

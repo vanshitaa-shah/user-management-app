@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// Protected Routes for preventing unauthorized users accessing Home page
 const ProtectedRoutes = ({ Component }) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isAuthenticated, setIsAuthenticated] = useState(false);

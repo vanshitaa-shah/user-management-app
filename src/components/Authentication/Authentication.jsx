@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../Header/Header";
 
+// Reusable container for both login and signup page
 const Authentication = ({ type }) => {
   const navigate = useNavigate();
 

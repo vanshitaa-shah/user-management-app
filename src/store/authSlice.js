@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "auth",
-  storage: storage,
+  storage: storage, //Using Loacal-storage
 };
 
 const initialState = {
@@ -23,11 +23,13 @@ const authSlice = createSlice({
         (user) => user.email === action.payload.email
       );
 
+      // If User already exists
       if (existingUser) {
         state.error = "User already exists,Login instead!";
         return;
       }
 
+      // If User is new
       const newUser = action.payload;
       state.currentUser = action.payload;
       state.isLoggedIn = true;
@@ -45,17 +47,21 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
           state.error = null;
         } else {
+          // If Valid email but invalid password
           state.error = "Invalid Password!";
         }
       } else {
+        // If email is not registered
         state.error = "User does not exist!";
       }
     },
+
     logout(state) {
       state.currentUser = null;
       state.isLoggedIn = false;
       state.error = null;
     },
+
     clearError(state) {
       state.error = null;
     },
