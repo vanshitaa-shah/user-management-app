@@ -1,25 +1,20 @@
 import React from "react";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home";
-import Signup from "./components/Signup/Signup";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import Authentication from "./components/Authentication/Authentication";
 
 const App = () => {
-  const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    } else {
-      navigate("/signUp");
-    }
-  }, []);
   return (
     <Routes>
-      <Route path="/signup" element={<Signup />}></Route>
-      <Route path="/home" element={<Home />}></Route>
+      <Route path="/" element={<Navigate to="/login" />}></Route>
+      <Route path="/signup" element={<Authentication type="SignUp" />}></Route>
+      <Route path="/login" element={<Authentication type="Login" />}></Route>
+      <Route
+        path="/home"
+        element={<ProtectedRoutes Component={Home} />}
+      ></Route>
     </Routes>
   );
 };

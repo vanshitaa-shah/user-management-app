@@ -4,8 +4,8 @@ import Styles from "./Home.module.css";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const userInfo = useSelector((state) => state.auth.user);
-  console.log(userInfo);
+  const userInfo = useSelector((state) => state.auth.currentUser);
+
   return (
     <>
       <Header />
