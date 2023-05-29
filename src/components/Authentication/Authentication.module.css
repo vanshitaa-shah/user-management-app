@@ -1,6 +1,7 @@
 .mainContainer {
   display: flex;
-  height: 90vh;
+  /* height: 90vh; */
+  min-height: calc(100vh - 60px);
   justify-content: center;
   align-items: center;
 }
@@ -9,6 +10,7 @@
   display: flex;
   padding: 20px;
   border: 1px solid #fff4ff;
+  position: relative;
   box-shadow: 0px 1px 6px 0 rgb(0 0 0 / 30%);
   width: 60%;
 }
@@ -38,6 +40,8 @@
 
 .imageContainer img {
   width: 80%;
+  height: 100%;
+  object-fit: contain;
   margin-left: 20%;
 }
 
@@ -113,5 +117,14 @@ label {
 @media screen and (max-width: 1024px) {
   .container {
     width: 85%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .imageContainer img {
+    width: 330px;
+    height: 100%;
+    object-fit: contain;
+    margin-left: 20%;
   }
 }

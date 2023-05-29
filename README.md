@@ -29,12 +29,13 @@
 
 - Header : contains navigation bar
 - Authentication : Contains Signup and login form, also form-utils for validation and form-level errors
-  - LoginForm
-  - SignupForm
-  - FormErrors
+  - Form/LoginForm
+  - Form/SignupForm
+  - FormError/FormErrors
+  - FieldError/ErrorMsg
   - InputField : Reusable component for Fields
 - Home : Contains homepage JSX
-- ErrorMsg : For Field-level errors
+- ErrorPage : Handles page not found Error
 
 ### Folder Structure :
 
@@ -48,8 +49,11 @@
     │   ├── App.jsx
     │   ├── assets
     │   │   ├── favicon.ico
+    │   │   ├── home_page.png
     │   │   ├── img.jpg
+    │   │   ├── login_page.png
     │   │   ├── preview.png
+    │   │   ├── signup_page.png
     │   │   └── signup.png
     │   ├── components
     │   │   ├── Authentication
@@ -59,14 +63,18 @@
     │   │   │   │   ├── LoginForm.jsx
     │   │   │   │   └── SignupForm.jsx
     │   │   │   ├── FormUtils
-    │   │   │   │   ├── FormErrors.jsx
-    │   │   │   │   ├── FormErrors.module.css
+    │   │   │   │   ├── FieldError
+    │   │   │   │   │   ├── ErrorMsg.jsx
+    │   │   │   │   │   └── ErrorMsg.module.css
+    │   │   │   │   ├── FormError
+    │   │   │   │   │   ├── FormErrors.jsx
+    │   │   │   │   │   └── FormErrors.module.css
     │   │   │   │   └── FormValidations.js
     │   │   │   └── InputField
     │   │   │       └── InputField.jsx
-    │   │   ├── ErrorMsg
-    │   │   │   ├── ErrorMsg.jsx
-    │   │   │   └── ErrorMsg.module.css
+    │   │   ├── ErrorPage
+    │   │   │   ├── ErrorPage.jsx
+    │   │   │   └── ErrorPage.module.css
     │   │   ├── Header
     │   │   │   ├── Header.jsx
     │   │   │   └── Header.module.css

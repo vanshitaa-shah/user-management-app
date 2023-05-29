@@ -11,9 +11,7 @@ export const signupValues = {
 };
 
 export const signupValidateSchema = Yup.object({
-  name: Yup.string()
-    .min(15, "Name should contain atleat 15 characters!")
-    .required("Name Required!"),
+  name: Yup.string().max(20, "Name too long!").required("Name Required!"),
 
   email: Yup.string()
     .required("Email Required!")
